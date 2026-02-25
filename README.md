@@ -1,8 +1,8 @@
-# Patient Literacy Translator Bot 🏥
+# Patient Literacy Translator Bot
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/idarapatrick/Patient-Literacy-Translator-Bot/blob/main/Medical_Translator.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/idarapatrick/Patient-Literacy-Translator-Bot/blob/main/model.ipynb)
 
-## 📋 Table of Contents
+## Table of Contents
 - [Project Overview](#project-overview)
 - [Problem Statement](#problem-statement)
 - [Technical Architecture](#technical-architecture)
@@ -17,17 +17,17 @@
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 The **Patient Literacy Translator Bot** is a domain-specific Large Language Model (LLM) assistant designed for healthcare and patient advocacy. This project addresses a critical gap in healthcare communication by translating complex medical jargon into plain, accessible language that patients with no medical background can understand.
 
 ### Problem Statement
 
 Medical professionals frequently use dense clinical terminology in discharge summaries, lab results, and clinical notes. This creates a significant barrier to health literacy, leading to:
-- ❌ Poor health outcomes
-- ❌ Improper medication usage
-- ❌ Higher hospital readmission rates
-- ❌ Patient confusion and anxiety
+- Poor health outcomes
+- Improper medication usage
+- Higher hospital readmission rates
+- Patient confusion and anxiety
 
 ### Solution
 
@@ -43,7 +43,7 @@ This assistant acts as a **"Patient Literacy Translator"** that bridges the comm
 
 ---
 
-## 🔧 Technical Architecture
+## Technical Architecture
 
 ### Base Model
 - **Model:** Google Gemma-2-2b-it
@@ -75,26 +75,14 @@ This assistant acts as a **"Patient Literacy Translator"** that bridges the comm
 
 ---
 
-## ✨ Features
-
-✅ **Parameter-Efficient Training:** Uses LoRA to enable training on free Google Colab T4 GPU (15GB VRAM)  
-✅ **Systematic Hyperparameter Tuning:** Multiple experiments with varying learning rates, batch sizes, and LoRA ranks  
-✅ **Quantitative Evaluation:** ROUGE and BLEU metrics for translation quality assessment  
-✅ **Interactive Web Interface:** Gradio-based UI for real-time medical text translation  
-✅ **Production-Ready:** Complete end-to-end pipeline from data preprocessing to deployment  
-✅ **Memory Optimized:** 4-bit quantization, gradient checkpointing, and paged optimizers  
-✅ **One-Click Deployment:** Colab badge for instant notebook launch
-
----
-
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 
 Before starting, ensure you have:
-- ✅ Google Account (for Google Colab access)
-- ✅ Hugging Face Account (free registration)
-- ✅ Google Drive space (~2GB for model checkpoints)
+- Google Account (for Google Colab access)
+- Hugging Face Account (free registration)
+- Google Drive space (~2GB for model checkpoints)
 
 ### Step 1: Create Hugging Face Account & Access Token
 
@@ -121,7 +109,7 @@ Before starting, ensure you have:
    - Or manually navigate to: `https://colab.research.google.com/github/idarapatrick/Patient-Literacy-Translator-Bot/blob/main/Medical_Translator.ipynb`
 
 2. **Add Hugging Face Token to Secrets:**
-   - In Colab, locate the **Secrets** tab (🔑 key icon on the left sidebar)
+   - In Colab, locate the **Secrets** tab (key icon on the left sidebar)
    - Click "+ Add new secret"
    - **Name:** `HF_TOKEN` (must be exact)
    - **Value:** Paste your Hugging Face access token
@@ -145,7 +133,7 @@ This allows the notebook to save your trained model to Google Drive for persiste
 
 ---
 
-## ▶️ Running the Project
+## Running the Project
 
 ### Option 1: Full Pipeline Execution (Recommended)
 
@@ -234,7 +222,7 @@ Text to translate: [complex text]
 
 **Expected Progress:**
 ```
-Training Progress: [████████████████] 100%
+Training Progress: 100%
 Step 100/100 | Loss: 1.46
 Final training Total time: 60.5 minutes.
 Model safely stored in Google Drive
@@ -242,52 +230,10 @@ Model safely stored in Google Drive
 
 **Duration:** ~60 minutes
 
-#### Stage 5: Evaluation & Interface (Cells 10-12)
-
-**Cell 10:** Install evaluation libraries
-```python
-!pip install -q evaluate rouge_score gradio
-```
-
-**Cell 11:** Load model and compute ROUGE scores
-- Loads fine-tuned model from checkpoint
-- Generates predictions on test set
-- Computes ROUGE metrics
-
-**Expected Metrics:**
-```
-ROUGE-1: 0.2436
-ROUGE-2: 0.0731
-ROUGE-L: 0.1801
-```
-
-**Cell 12:** Launch Gradio interface
-```
-Running on public URL: https://xxxxx.gradio.live
-```
-
-**Duration:** ~5-10 minutes
-
----
-
-## 📊 Hyperparameter Experiment Results
-
-| Experiment | Learning Rate | Batch Size | LoRA Rank | Training Time (mins) | Final Loss |
-|------------|---------------|------------|-----------|----------------------|------------|
-| 1 (Baseline) | 2e-4 | 2 | 8 | 20.98 | 1.4758 |
-| 2 (Lower LR) | 5e-5 | 2 | 8 | 21.20 | 1.7944 |
-| 3 (Higher Batch)* | 2e-4 | 4 | 8 | 51.27 | **1.4613** |
-
 **Best Configuration:** Experiment 3 (Learning Rate: 2e-4, Batch Size: 4, LoRA Rank: 8)
-
-### Key Insights:
-- **Lower learning rate (5e-5)** resulted in slower convergence and higher final loss
-- **Higher batch size (4)** provided more stable gradients and best final loss
-- **1 epoch** was sufficient to avoid overfitting while achieving domain adaptation
-
 ---
 
-## 📈 Performance Metrics
+## Performance Metrics
 
 ### ROUGE Scores (Translation Quality)
 
@@ -307,7 +253,7 @@ Running on public URL: https://xxxxx.gradio.live
 
 ---
 
-## 🖥️ Using the Gradio Interface
+## Using the Gradio Interface
 
 Once cell 11 completes, a Gradio web interface launches with a **public shareable URL**.
 
@@ -349,26 +295,19 @@ no known cause and needs pain medication right away.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 Patient-Literacy-Translator-Bot/
 │
-├── Medical_Translator.ipynb          # Main notebook (complete pipeline)
+├── model.ipynb          # Main notebook (complete pipeline)
 ├── README.md                          # This comprehensive guide
-│
-└── Google Drive Storage (Auto-created during training):
-    └── /content/drive/MyDrive/
-        └── gemma-medical-translator-production/
-            ├── adapter_config.json    # LoRA configuration
-            ├── adapter_model.safetensors  # Fine-tuned weights
-            ├── tokenizer_config.json  # Tokenizer settings
-            └── special_tokens_map.json
+
 ```
 
 ---
 
-## 🔑 Key Dependencies
+## Key Dependencies
 
 ```python
 transformers       # v4.36+   - Hugging Face Transformers
@@ -388,7 +327,7 @@ All dependencies are automatically installed via the notebook's pip commands.
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 ### Issue 1: Out of Memory (OOM) Errors
 
@@ -497,80 +436,16 @@ Drive already mounted; ... or use force_remount=True
    ```python
    drive.mount('/content/gdrive')
    ```
-
 ---
 
-## 🎓 Academic Context
+## Academic Context
 
-This project was developed as part of a **Domain-Specific Assistant via LLM Fine-Tuning** assignment, demonstrating:
-
-- ✅ End-to-end LLM fine-tuning pipeline
-- ✅ Parameter-efficient training techniques (LoRA/PEFT)
-- ✅ Systematic hyperparameter optimization with documented experiments
-- ✅ Quantitative evaluation (ROUGE, BLEU)
-- ✅ Qualitative assessment with baseline comparison
-- ✅ Production deployment with user-friendly interface
-- ✅ Complete documentation and reproducibility
-
-### Assignment Requirements Met:
-- [x] Dataset collection and preprocessing (2,500+ examples)
-- [x] Parameter-efficient fine-tuning (LoRA with <1% trainable params)
-- [x] Hyperparameter tuning table (3+ experiments documented)
-- [x] Performance metrics (ROUGE scores)
-- [x] Baseline vs. fine-tuned comparison
-- [x] Interactive interface (Gradio web app)
-- [x] Colab-compatible notebook
-- [x] Comprehensive README with setup instructions
-
+This project was designed for academic evaluation only.
 ---
 
-## 📜 License
+## License
 
 This project uses the Google Gemma model, which is subject to **Gemma Terms of Use**.  
 Please review the license at: [ai.google.dev/gemma/terms](https://ai.google.dev/gemma/terms)
 
 ---
-
-## 📚 Citation
-
-If you use this project in your research or work, please cite:
-
-```bibtex
-@misc{patient-literacy-translator-2026,
-  author = {Idara Patrick},
-  title = {Patient Literacy Translator Bot: Fine-Tuning Gemma-2B for Medical Text Simplification},
-  year = {2026},
-  publisher = {GitHub},
-  url = {https://github.com/idarapatrick/Patient-Literacy-Translator-Bot},
-  note = {Domain-specific LLM fine-tuning using LoRA for healthcare communication}
-}
-```
-
----
-
-## 🤝 Contact & Support
-
-For questions, issues, or contributions:
-
-- **GitHub Issues:** [Create an issue](https://github.com/idarapatrick/Patient-Literacy-Translator-Bot/issues)
-- **Pull Requests:** Contributions welcome!
-- **Email:** Contact repository owner via GitHub profile
-
----
-
-## 🙏 Acknowledgments
-
-- **Dataset:** [Medical Meadow WikiDoc](https://huggingface.co/datasets/medalpaca/medical_meadow_wikidoc_patient_information) - MedAlpaca team
-- **Base Model:** [Google Gemma-2-2b-it](https://huggingface.co/google/gemma-2-2b-it) - Google DeepMind
-- **Libraries:**
-  - Hugging Face Transformers team
-  - PEFT library maintainers
-  - TRL (Transformer Reinforcement Learning) developers
-  - Gradio team for intuitive ML interfaces
-- **Platform:** Google Colab for free GPU access
-
----
-
-**Last Updated:** February 22, 2026  
-**Version:** 1.0  
-**Status:** Production-Ready ✅
